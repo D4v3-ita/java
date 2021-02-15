@@ -15,19 +15,7 @@ public class Main {
         System.out.println("Crea il tuo PIN");
         pin = tastiera.nextLine();
 
-        // controlla se il PIN inserito è < o > 5, in quel caso lo fa reinserire
-        while(pin.length() < 5 || pin.length() > 5){
-            System.out.println("Reinserisci il PIN:");
-            pin = tastiera.nextLine();
-        }
-
-        // array di char (per ogni cifra del PIN appena creato)
-        char[] arrpincreato = new char[5];
-
-        // ogni cifra va in una cella di array
-        for(i=0;i<5;i++){
-            arrpincreato[i] = pin.charAt(i);
-        }
+        char[] arrpincreato = crearePin(pin, tastiera);
 
 
         // ---------------------------------------------------------------------------------------------------------
@@ -55,6 +43,57 @@ public class Main {
         System.out.println("Inserisci il tuo PIN per accedere");
         String pinxaccedere = tastiera.nextLine();
 
+        char[] arrpinxaccedere = reinserirePin(pinxaccedere, tastiera);
+
+
+
+        // ---------------------------------------------------------------------------------------------------------
+
+
+
+        int sbagliato = confrontaPin(arrpinxaccedere, numrand, arrpincreato);
+
+        // se anche solo una cifra è stata digitata male, stampa messaggio di errore ...
+        // ... altrimenti, se tutto è giusto, stampa il PIN originale
+        if(sbagliato!=0){
+            System.out.println("PIN NON VALIDO");
+            System.out.println(sbagliato);
+        } else {
+            for(i=0;i< arrpincreato.length;i++){
+                System.out.print(arrpincreato[i] + " ");
+            }
+            System.out.println(sbagliato);
+        }
+
+    }
+
+
+// -----------------------------------------------------------------------------
+    public static char[] crearePin(String pin, Scanner tastiera){
+        int i;
+
+        // controlla se il PIN inserito è < o > 5, in quel caso lo fa reinserire
+        while(pin.length() < 5 || pin.length() > 5){
+            System.out.println("Reinserisci il PIN:");
+            pin = tastiera.nextLine();
+        }
+
+        // array di char (per ogni cifra del PIN appena creato)
+        char[] arrpincreato = new char[5];
+
+        // ogni cifra va in una cella di array
+        for(i=0;i<5;i++){
+            arrpincreato[i] = pin.charAt(i);
+        }
+
+        return arrpincreato;
+
+    }
+
+// ----------------------------------------------------------------------------------
+    public static char[] reinserirePin(String pinxaccedere, Scanner tastiera){
+        int i;
+
         // controlla se il PIN inserito è < o > 5, in quel caso lo fa reinserire
         while(pinxaccedere.length() < 5 || pinxaccedere.length() > 5){
             System.out.println("Reinserisci il PIN:");
@@ -69,13 +108,17 @@ public class Main {
             arrpinxaccedere[i] = pinxaccedere.charAt(i);
         }
 
+        return arrpinxaccedere;
 
+    }
 
-        // ---------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
 
-        // contatore inverso per le cifre sbagliate
+    public static int confrontaPin(char[] arrpinxaccedere, int[] numrand, char[] arrpincreato){
+        int i;
+        int l;
+// contatore inverso per le cifre sbagliate
         int sbagliato = 5;
-
         for(i=0;i<arrpinxaccedere.length;i++){
             for(i=0;i<arrpincreato.length;i++){
                 for(l=0;l<10;l++){
@@ -90,18 +133,9 @@ public class Main {
 
         }
 
-        // se anche solo una cifra è stata digitata male, stampa messaggio di errore ...
-        // ... altrimenti, se tutto è giusto, stampa il PIN originale
-        if(sbagliato!=0){
-            System.out.println("PIN NON VALIDO");
-        } else {
-            for(i=0;i< arrpincreato.length;i++){
-                System.out.print(arrpincreato[i] + " ");
-            }
-        }
+        return sbagliato;
 
     }
 
-    // ho provato a riscrivere l'esercizio usando i metodi ma guasta il risultato ...
-    // ... più precisamente la variabile "sbagliato". Perciò ho lasciato solamente il main
+
 }
