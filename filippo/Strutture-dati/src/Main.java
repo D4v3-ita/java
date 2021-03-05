@@ -1,18 +1,34 @@
 public class Main {
     public static void main(String[] args) {
-        List l = new Node(1, new Node(2, new Node(3, new Nil())));
-
-//        Nil nil = new Nil();
-//        Node n3 = new Node(3, nil);
-//        Node n2 = new Node(2, n3);
-//        Node n1 = new Node(1, n2);
-//        List l1 = n1;
-        System.out.println(l);
-        l = new Node(0,l);
-
+        List l = new Node(25, new Node(1,new Node(4,new Node(10,new Nil()))));
         System.out.println(l);
 
-        l = l.addLast(4);
+        l = l.addLast(2);
         System.out.println(l);
+
+        l = l.add(24,1);
+        System.out.println(l);
+
+        l = l.remove(4);
+        System.out.println(l);
+
+        l = l.removeAtIndex(2);
+        System.out.println(l);
+
+        l = l.doppio();
+        System.out.println(l);
+
+        boolean result = l.pari();
+        System.out.println(result);
+
+        //ordinata crescente
+        result = l.ordinata(0);
+        System.out.println(result);
+
+        result = l.ordinataCrescenteDecrescente(0,0, 0);
+        System.out.println(result);
+
+        int lung = l.length();
+        System.out.println(lung);
     }
 }

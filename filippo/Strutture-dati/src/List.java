@@ -2,7 +2,6 @@ public abstract class List {
     // abstract ci è utile
 
     public abstract List addLast(int x);
-    public abstract void addLast2(int x);
 
     // creare metodo che inserisca un valore al centro della lista
     public abstract List add(int x, int i);
@@ -21,5 +20,10 @@ public abstract class List {
 
     // true se la lista è in ordine crescente
     public abstract boolean ordinata(int next);
+
+    public abstract boolean ordinataCrescenteDecrescente(int next, int counter, int step);
+
+    // ritorna la lunghezza della lista
+    public abstract int length();
 
 }
